@@ -95,7 +95,7 @@ namespace CRUD.Dapper.User.Data
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e.Message);                    
+                    Console.WriteLine(e.Message);
                 }
             }
         }
@@ -130,9 +130,34 @@ namespace CRUD.Dapper.User.Data
             }
         }
 
-        public void Delete(int id)
+        public string Delete(int id)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(_context.StringConection))
+            {
+                if (id != 0)
+                {
+                    try
+                    {
+                        connection.Execute
+                            (
+                                "DELETE FROM " +
+                                "   Client " +                                
+                                "WHERE " +
+                                "   id_client = @id_client"
+                                , new {id_client = id}
+                            );
+                        return "Client deleted";
+                    }
+                    catch (Exception e)
+                    {
+                        return e.Message;
+                    }
+                }
+                else
+                {
+                    return "Incorrect Id";
+                }
+            }
         }
     }
 }

@@ -13,6 +13,6 @@ namespace CRUD.Dapper.User.Data.Interface
         public Client GetById(int id);
         public void Insert(Client client);
         public void Update(Client client);
-        public void Delete(int id);
+        public string Delete(int id);
     }
 }

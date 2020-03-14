@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace CRUD.Dapper.User
 {
@@ -30,8 +31,14 @@ namespace CRUD.Dapper.User
         {
             services.AddControllers();
 
+
             services.AddSingleton(Configuration.GetSection("SqlConfig").Get<SqlConfig>());
             services.AddSingleton<IDbContext, SqlContextData>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Client API", Version = "v1" });
+            });
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -40,16 +47,23 @@ namespace CRUD.Dapper.User
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+            });
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Client API V1");
+                c.RoutePrefix = "swagger";
             });
         }
     }

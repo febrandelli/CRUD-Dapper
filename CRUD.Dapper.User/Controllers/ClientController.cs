@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CRUD.Dapper.User.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class ClientController : ControllerBase
     {
@@ -36,21 +36,29 @@ namespace CRUD.Dapper.User.Controllers
         }
 
         //POST api/client/
-        [HttpPost]
+        [HttpPost ("insert")]
         public ActionResult<Client> Insert(Client client)
         {
             //client.DataAtCreate = client.DataAtCreat;
             _dbContext.Insert(client);
             return client;
-
         }
 
-        [HttpPut]
+        //PUT api/client/
+        [HttpPut("update")]
         public ActionResult<Client> Update(Client client)
         {
             //client.DataAtCreate = client.DataAtCreat;
             _dbContext.Update(client);
             return client;
+        }
+        
+        //DELETE api/client/
+        [HttpDelete ("delete")]
+        public ActionResult<string> Delete(Client client)
+        {
+            
+            return _dbContext.Delete(client.Id_Client); ;
 
         }
     }
