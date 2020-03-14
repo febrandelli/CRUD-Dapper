@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CRUD.Dapper.User.Domain
 {
-    public class User
+    public class Client
     {
         public int Id { get; set; }
         public string Name { get; set; }

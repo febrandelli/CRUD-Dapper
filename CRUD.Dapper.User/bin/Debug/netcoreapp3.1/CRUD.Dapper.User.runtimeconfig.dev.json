@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\febra\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\febra\\.nuget\\packages"
+    ]
+  }
+}
