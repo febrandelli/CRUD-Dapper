@@ -7,11 +7,11 @@ namespace CRUD.Dapper.User.Domain
 {
     public class Client
     {
-        public int Id { get; set; }
+        public int Id_Client{ get; set; }
         public string Name { get; set; }
         public string CPF { get; set; }
         public string Email { get; set; }
         public string Alias { get; set; }
-        public DateTime CreateDate { get; set; }
+        public DateTime DataAtCreate { get; set; }
     }
 }

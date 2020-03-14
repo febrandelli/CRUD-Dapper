@@ -16,6 +16,7 @@ namespace CRUD.Dapper.User.Data
         public SqlContextData(SqlConfig context)
         {
             _context = context;
+            CreateDataBase();
         }
         public void CreateDataBase()
         {
@@ -23,7 +24,18 @@ namespace CRUD.Dapper.User.Data
             {
                 try
                 {
-                    connection.Execute("Create table cidade (id_cidade int primary key, cidade varchar(30), estado int)");
+                    connection.Execute("if (object_id ('master.dbo.Client')) is null " +
+                        "CREATE TABLE " +
+                        "   Client (" +
+                        "       id_client INT IDENTITY(1,1) PRIMARY KEY, " +
+                        "       name VARCHAR(100) NOT NULL, " +
+                        "       CPF VARCHAR(14) NOT NULL," +
+                        "       email VARCHAR(50) NOT NULL," +
+                        "       alias VARCHAR(100)," +
+                        "       dataAtCreate DATE " +
+                        "   )"
+                        );
+
                 }
                 catch
                 {
@@ -38,7 +50,7 @@ namespace CRUD.Dapper.User.Data
             {
                 try
                 {
-                    return connection.Query<Client>("SELECT * FROM NAME_OF_TABLE").ToList();
+                    return connection.Query<Client>("SELECT * FROM dbo.Client").ToList();
 
                 }
                 catch

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CRUD.Dapper.User.Data.Interface;
+using CRUD.Dapper.User.Domain;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,10 +21,9 @@ namespace CRUD.Dapper.User.Controllers
         }
         //GET api/client/
         [HttpGet]
-        public ActionResult<string> Create()
-        {
-            _dbContext.CreateDataBase();
-            return "Criado o banco";
+        public ActionResult<List<Client>> List()
+        {            
+            return _dbContext.GetAll();
         }
     }
 }
