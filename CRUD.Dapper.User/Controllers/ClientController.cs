@@ -25,5 +25,12 @@ namespace CRUD.Dapper.User.Controllers
         {            
             return _dbContext.GetAll();
         }
+        //GET api/client/3
+        [HttpGet("details/{id}",Name = "GetID")]
+        public ActionResult<Client> Details(int id)
+        {
+            return _dbContext.GetById(id);
+            
+        }
     }
 }

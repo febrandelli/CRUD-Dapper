@@ -63,9 +63,20 @@ namespace CRUD.Dapper.User.Data
 
         public Client GetById(int id)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(_context.StringConection))
+            {
+                try
+                {
+                    return connection.QueryFirst<Client>("SELECT * FROM Client " +
+                        "WHERE id_client = @idClient;", new { idClient = id });
+                }
+                catch
+                {
+                    return new Client();
+                }
+            }
         }
-
+        
         public void Insert(Client client)
         {
             throw new NotImplementedException();
