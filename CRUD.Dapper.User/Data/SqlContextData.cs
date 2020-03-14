@@ -102,7 +102,32 @@ namespace CRUD.Dapper.User.Data
 
         public void Update(Client client)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(_context.StringConection))
+            {
+                if (client.Id_Client != 0)
+                {
+                    try
+                    {
+                        connection.Execute
+                            (
+                                "" +
+                                "UPDATE Client " +
+                                "SET " +
+                                "   name = @name, " +
+                                "   CPF = @CPF, " +
+                                "   email = @email," +
+                                "   alias = @alias " +
+                                "WHERE " +
+                                "   id_client = @id_client"
+                                , client
+                            );
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+            }
         }
 
         public void Delete(int id)

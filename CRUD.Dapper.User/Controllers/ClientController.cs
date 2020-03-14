@@ -19,12 +19,14 @@ namespace CRUD.Dapper.User.Controllers
         {
             _dbContext = dbContext;
         }
+
         //GET api/client/
         [HttpGet]
         public ActionResult<List<Client>> List()
         {
             return _dbContext.GetAll();
         }
+
         //GET api/client/3
         [HttpGet("details/{id}", Name = "GetID")]
         public ActionResult<Client> Details(int id)
@@ -32,12 +34,22 @@ namespace CRUD.Dapper.User.Controllers
             return _dbContext.GetById(id);
 
         }
+
         //POST api/client/
         [HttpPost]
         public ActionResult<Client> Insert(Client client)
         {
             //client.DataAtCreate = client.DataAtCreat;
             _dbContext.Insert(client);
+            return client;
+
+        }
+
+        [HttpPut]
+        public ActionResult<Client> Update(Client client)
+        {
+            //client.DataAtCreate = client.DataAtCreat;
+            _dbContext.Update(client);
             return client;
 
         }
