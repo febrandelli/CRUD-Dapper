@@ -5,6 +5,7 @@ using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 
 namespace CRUD.Dapper.User.Data
@@ -35,7 +36,6 @@ namespace CRUD.Dapper.User.Data
                         "       dataAtCreate DATE " +
                         "   )"
                         );
-
                 }
                 catch
                 {
@@ -76,16 +76,35 @@ namespace CRUD.Dapper.User.Data
                 }
             }
         }
-        
+
         public void Insert(Client client)
         {
-            throw new NotImplementedException();
+            using (var connection = new SqlConnection(_context.StringConection))
+            {
+                try
+                {
+                    connection.Execute
+                        (
+                            "" +
+                            "INSERT INTO Client ( " +
+                            "   name, CPF, email,alias, dataAtCreate)" +
+                            "Values(" +
+                            "   @name, @CPF, @email, @alias, @dataAtCreate)"
+                            , client
+                        );
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);                    
+                }
+            }
         }
 
         public void Update(Client client)
         {
             throw new NotImplementedException();
         }
+
         public void Delete(int id)
         {
             throw new NotImplementedException();

@@ -12,6 +12,6 @@ namespace CRUD.Dapper.User.Domain
         public string CPF { get; set; }
         public string Email { get; set; }
         public string Alias { get; set; }
-        public DateTime DataAtCreate { get; set; }
+        public string DataAtCreate { get; set; }
     }
 }
